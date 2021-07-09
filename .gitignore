@@ -1,0 +1,4 @@
+node_modules/
+docs/.vuepress/theme
+package-lock.json
+public/
