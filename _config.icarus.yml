@@ -273,7 +273,7 @@ widgets:
         type: links
         # Names and URLs of the sites
         links:
-            Hexo: https://hexo.io
+            # Hexo: https://hexo.io
             JCCGG: https://blog.wwdab.cn/
             Chrrg: https://github.com/chrrg
      # Recent posts widget configurations

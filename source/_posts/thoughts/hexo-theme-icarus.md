@@ -14,7 +14,7 @@ tags:
 
 一个**简单**、**精致**和**现代**的静态站点生成器 Hexo 的主题。
 
-Hexo 比 Vuepress 好用坑也少，拿来坐 blog 真的是棒极了。
+Hexo 比 Vuepress 好用坑也少，拿来做 blog 真的是棒极了。
 
 ~~**icarus** 主题，我真的好喜欢你，为了你，我要重新开始写博客！~~
 
@@ -28,7 +28,7 @@ Hexo 比 Vuepress 好用坑也少，拿来坐 blog 真的是棒极了。
 
 这个主题确实够好看，直接让我自己的主题开发计划流产了。
 
-废话不多说线上链接
+废话不多说直接放上链接
 
 [https://github.com/ppoffice/hexo-theme-icarus](https://github.com/ppoffice/hexo-theme-icarus "链接在这里")
 
