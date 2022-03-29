@@ -14,9 +14,9 @@ tags:
 
 之前心血来潮打算自己做一个主题，名字还没想好，先叫 test 吧。不过最近发现了一个很好看的[主题](https://github.com/ppoffice/hexo-theme-icarus)，感觉有点懒得折腾自己的主题了，希望能给自己列个计划排期，希望有朝一日可以用上这个主题。~~（大概率不会完成）~~
 
-[项目预览](https://zhanglingkun.gitee.io/)
+[项目预览](https://zhanglingkun.gitee.io/blog/)
 
-![demo](https://gitee.com/zhanglingkun/image-hosting-service/raw/master/img/hexo-theme-test.png)
+![demo](https://cdn.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/hexo-theme-test.png)
 
 #### **当前进度**
 
