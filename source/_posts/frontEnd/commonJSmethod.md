@@ -12,7 +12,7 @@ categories:
 <!--more-->
 
 
-1、输入一个值，返回其数据类型**
+### 1、输入一个值，返回其数据类型
 
 ```
 function type(para) {
@@ -20,7 +20,7 @@ function type(para) {
 }
 ```
 
-##### 2、数组去重
+### 2、数组去重
 
 ```
 function unique1(arr) {
@@ -48,7 +48,7 @@ function unique3(arr) {
 }
 ```
 
-##### 3、字符串去重
+### 3、字符串去重
 
 ```
 String.prototype.unique = function () {
@@ -64,13 +64,13 @@ String.prototype.unique = function () {
     return str;
 }
 
-###### //去除连续的字符串 
+#### //去除连续的字符串 
 function uniq(str) {
     return str.replace(/(\w)\1+/g, '$1')
 }
 ```
 
-##### 4、深拷贝 浅拷贝
+### 4、深拷贝 浅拷贝
 
 ```
 //深克隆（深克隆不考虑函数）
@@ -121,7 +121,7 @@ function deepClone(target) {
 var o1 = jsON.parse(jsON.stringify(obj1));
 ```
 
-##### 5、reverse底层原理和扩展
+### 5、reverse底层原理和扩展
 
 ```
 // 改变原数组
@@ -136,7 +136,7 @@ Array.prototype.myReverse = function () {
 }
 ```
 
-##### 6、圣杯模式的继承
+### 6、圣杯模式的继承
 
 ```
 function inherit(Target, Origin) {
@@ -149,7 +149,7 @@ function inherit(Target, Origin) {
 }
 ```
 
-##### 7、找出字符串中第一次只出现一次的字母
+### 7、找出字符串中第一次只出现一次的字母
 
 ```
 String.prototype.firstAppear = function () {
@@ -170,7 +170,7 @@ String.prototype.firstAppear = function () {
 }
 ```
 
-##### 8、找元素的第n级父元素
+### 8、找元素的第n级父元素
 
 ```
 function parents(ele, n) {
@@ -182,7 +182,7 @@ function parents(ele, n) {
 }
 ```
 
-##### 9、 返回元素的第n个兄弟节点
+### 9、 返回元素的第n个兄弟节点
 
 ```
 function retSibling(e, n) {
@@ -207,7 +207,7 @@ function retSibling(e, n) {
 }
 ```
 
-##### 10、封装mychildren，解决浏览器的兼容问题
+### 10、封装mychildren，解决浏览器的兼容问题
 
 ```
 function myChildren(e) {
@@ -223,7 +223,7 @@ function myChildren(e) {
 }
 ```
 
-##### 11、判断元素有没有子元素
+### 11、判断元素有没有子元素
 
 ```
 function hasChildren(e) {
@@ -238,7 +238,7 @@ function hasChildren(e) {
 }
 ```
 
-##### 12、我一个元素插入到另一个元素的后面
+### 12、我一个元素插入到另一个元素的后面
 
 ```
 Element.prototype.insertAfter = function (target, elen) {
@@ -251,7 +251,7 @@ Element.prototype.insertAfter = function (target, elen) {
 }
 ```
 
-##### 13、返回当前的时间（年月日时分秒）
+### 13、返回当前的时间（年月日时分秒）
 
 ```
 function getDateTime() {
@@ -277,7 +277,7 @@ function getDateTime() {
 }
 ```
 
-##### 14、获得滚动条的滚动距离
+### 14、获得滚动条的滚动距离
 
 ```
 function getScrollOffset() {
@@ -295,7 +295,7 @@ function getScrollOffset() {
 }
 ```
 
-##### 15、获得视口的尺寸
+### 15、获得视口的尺寸
 
 ```
 function getViewportOffset() {
@@ -323,7 +323,7 @@ function getViewportOffset() {
 }
 ```
 
-##### 16、获取任一元素的任意属性
+### 16、获取任一元素的任意属性
 
 ```
 function getStyle(elem, prop) {
@@ -331,7 +331,7 @@ function getStyle(elem, prop) {
 }
 ```
 
-##### 17、绑定事件的兼容代码
+### 17、绑定事件的兼容代码
 
 ```
 function addEvent(elem, type, handle) {
@@ -347,7 +347,7 @@ function addEvent(elem, type, handle) {
 }
 ```
 
-##### 18、解绑事件
+### 18、解绑事件
 
 ```
 function removeEvent(elem, type, handle) {
@@ -361,7 +361,7 @@ function removeEvent(elem, type, handle) {
 }
 ```
 
-##### 19、取消冒泡的兼容代码
+### 19、取消冒泡的兼容代码
 
 ```
 function stopBubble(e) {
@@ -373,7 +373,7 @@ function stopBubble(e) {
 }
 ```
 
-##### 20、检验字符串是否是回文
+### 20、检验字符串是否是回文
 
 ```
 function isPalina(str) {
@@ -390,7 +390,7 @@ function isPalina(str) {
 }
 ```
 
-##### 21、检验字符串是否是回文
+### 21、检验字符串是否是回文
 
 ```
 function isPalindrome(str) {
@@ -400,7 +400,7 @@ function isPalindrome(str) {
 }
 ```
 
-##### 22、兼容getElementsByClassName方法
+### 22、兼容getElementsByClassName方法
 
 ```
 Element.prototype.getElementsByClassName = Document.prototype.getElementsByClassName = function (_className) {
@@ -423,7 +423,7 @@ Element.prototype.getElementsByClassName = Document.prototype.getElementsByCla
 }
 ```
 
-##### 23、运动函数
+### 23、运动函数
 
 ```
 function animate(obj, json, callback) {
@@ -458,7 +458,7 @@ function animate(obj, json, callback) {
 }
 ```
 
-##### 24、弹性运动
+### 24、弹性运动
 
 ```
 function ElasticMovement(obj, target) {
@@ -480,7 +480,7 @@ function ElasticMovement(obj, target) {
 }
 ```
 
-##### 25、封装自己的forEach方法
+### 25、封装自己的forEach方法
 
 ```
 Array.prototype.myForEach = function (func, obj) {
@@ -493,7 +493,7 @@ Array.prototype.myForEach = function (func, obj) {
 }
 ```
 
-##### 26、封装自己的filter方法
+### 26、封装自己的filter方法
 
 ```
 Array.prototype.myFilter = function (func, obj) {
@@ -507,7 +507,7 @@ Array.prototype.myFilter = function (func, obj) {
 }
 ```
 
-##### 27、数组map方法
+### 27、数组map方法
 
 ```
 Array.prototype.myMap = function (func) {
@@ -521,7 +521,7 @@ Array.prototype.myMap = function (func) {
 }
 ```
 
-##### 28、数组every方法
+### 28、数组every方法
 
 ```
 Array.prototype.myEvery = function (func) {
@@ -538,7 +538,7 @@ Array.prototype.myEvery = function (func) {
 }
 ```
 
-##### 29、数组reduce方法
+### 29、数组reduce方法
 
 ```
 Array.prototype.myReduce = function (func, initialValue) {
@@ -561,7 +561,7 @@ Array.prototype.myReduce = function (func, initialValue) {
 }
 ```
 
-##### 30、获取url中的参数
+### 30、获取url中的参数
 
 ```
 function getWindonHref() {
@@ -580,7 +580,7 @@ function getWindonHref() {
 }
 ```
 
-##### 31、数组排序
+### 31、数组排序
 
 ```
 // 快排 [left] + min + [right]
@@ -632,7 +632,7 @@ function bubbleSort(arr) {
 }
 ```
 
-##### 32、遍历Dom树
+### 32、遍历Dom树
 
 ```
 // 给定页面上的DOM元素,将访问元素本身及其所有后代(不仅仅是它的直接子元素)
@@ -646,7 +646,7 @@ function traverse(element, callback) {
 }
 ```
 
-##### 33、原生js封装ajax
+### 33、原生js封装ajax
 
 ```
 function ajax(method, url, callback, data, flag) {
@@ -678,7 +678,7 @@ function ajax(method, url, callback, data, flag) {
 }
 ```
 
-##### 34、异步加载script
+### 34、异步加载script
 
 ```
 function loadScript(url, callback) {
@@ -699,7 +699,7 @@ function loadScript(url, callback) {
 }
 ```
 
-##### 35、cookie管理
+### 35、cookie管理
 
 ```
 var cookie = {
@@ -723,7 +723,7 @@ var cookie = {
 }
 ```
 
-##### 36、实现bind()方法
+### 36、实现bind()方法
 
 ```
 Function.prototype.myBind = function (target) {
@@ -742,7 +742,7 @@ Function.prototype.myBind = function (target) {
 }
 ```
 
-##### 37、实现call()方法
+### 37、实现call()方法
 
 ```
 Function.prototype.myCall = function () {
@@ -758,7 +758,7 @@ Function.prototype.myCall = function () {
 }
 ```
 
-##### 38、实现apply()方法
+### 38、实现apply()方法
 
 ```
 Function.prototype.myApply = function () {
@@ -775,7 +775,7 @@ Function.prototype.myApply = function () {
 }
 ```
 
-##### 39、防抖
+### 39、防抖
 
 ```
 function debounce(handle, delay) {
@@ -791,7 +791,7 @@ function debounce(handle, delay) {
 }
 ```
 
-##### 40、节流
+### 40、节流
 
 ```
 function throttle(handler, wait) {
@@ -806,7 +806,7 @@ function throttle(handler, wait) {
 }
 ```
 
-##### 41、requestAnimFrame兼容性方法
+### 41、requestAnimFrame兼容性方法
 
 ```
 window.requestAnimFrame = (function () {
@@ -819,7 +819,7 @@ window.requestAnimFrame = (function () {
 })();
 ```
 
-##### 42、cancelAnimFrame兼容性方法
+### 42、cancelAnimFrame兼容性方法
 
 ```
 window.cancelAnimFrame = (function () {
@@ -832,7 +832,7 @@ window.cancelAnimFrame = (function () {
 })();
 ```
 
-##### 43、jsonp底层方法
+### 43、jsonp底层方法
 
 ```
 function jsonp(url, callback) {
@@ -853,7 +853,7 @@ function jsonp(url, callback) {
 }
 ```
 
-##### 44、获取url上的参数
+### 44、获取url上的参数
 
 ```
 function getUrlParam(sUrl, sKey) {
@@ -874,7 +874,7 @@ function getUrlParam(sUrl, sKey) {
 }
 ```
 
-##### 45、格式化时间
+### 45、格式化时间
 
 ```
 function formatDate(t, str) {
@@ -901,7 +901,7 @@ function formatDate(t, str) {
 }
 ```
 
-##### 46、验证邮箱的正则表达式
+### 46、验证邮箱的正则表达式
 
 ```
 function isAvailableEmail(sEmail) {
@@ -910,7 +910,7 @@ function isAvailableEmail(sEmail) {
 }
 ```
 
-##### 47、函数柯里化
+### 47、函数柯里化
 
 ```
 //是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术
@@ -931,7 +931,7 @@ function curryIt(fn) {
 }
 ```
 
-##### 48、大数相加
+### 48、大数相加
 
 ```
 function sumBigNumber(a, b) {
@@ -949,7 +949,7 @@ function sumBigNumber(a, b) {
 }
 ```
 
-##### 49、单例模式
+### 49、单例模式
 
 ```
 function getSingle(func) {
