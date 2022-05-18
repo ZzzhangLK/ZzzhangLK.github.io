@@ -3,11 +3,11 @@ version: 4.0.0
 # Icarus theme variant, can be "default" or "cyberpunk"
 variant: default
 # Path or URL to the website's logo
-logo: https://cdn.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png
+logo: https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png
 # Page metadata configurations
 head:
     # URL or path to the website's icon
-    favicon: https://cdn.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png
+    favicon: https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png
     # Web application manifests configuration
     # https://developer.mozilla.org/en-US/docs/Web/Manifest
     manifest:
@@ -176,7 +176,7 @@ donates:
     -
         type: alipay
         # Alipay qrcode image URL
-        qrcode: 'https://cdn.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/alipay.jpg'
+        qrcode: 'https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/alipay.jpg'
     # "Buy me a coffee" donate button configurations
     # -
     #     type: buymeacoffee
@@ -198,7 +198,7 @@ donates:
     -
         type: wechat
         # Wechat qrcode image URL
-        qrcode: 'https://cdn.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/wechat.jpg'
+        qrcode: 'https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/wechat.jpg'
 # Share plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Share/
 # share:
@@ -231,7 +231,7 @@ widgets:
         # Author's current location
         location: Shenzhen, China
         # URL or path to the avatar image
-        avatar: https://cdn.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png
+        avatar: https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png
         # Whether show the rounded avatar image
         avatar_rounded: false
         # Email address for the Gravatar

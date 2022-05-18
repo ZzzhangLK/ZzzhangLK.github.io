@@ -53,8 +53,8 @@ tags:
 
 我使用的图片上传工具是 `PicGo` 这里简单讲描述一下：
 
-CDN地址：https://cdn.jsdelivr.net
-picGo中配置：https://cdn.jsdelivr.net/gh/用户名/仓库名
+CDN地址：https://fastly.jsdelivr.net
+picGo中配置：https://fastly.jsdelivr.net/gh/用户名/仓库名
 
 其他的方案，比如七牛云（这个需要弄域名备案），腾讯云（有免费存储空间，半年期限）。
 

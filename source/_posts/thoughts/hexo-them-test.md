@@ -16,7 +16,7 @@ tags:
 
 [项目预览](https://zhanglingkun.gitee.io/blog/)
 
-![demo](https://cdn.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/hexo-theme-test.png)
+![demo](https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/hexo-theme-test.png)
 
 #### **当前进度**
 
