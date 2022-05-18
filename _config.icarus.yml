@@ -273,11 +273,11 @@ widgets:
         type: links
         # Names and URLs of the sites
         links:
-            # Hexo: https://hexo.io
             JCCGG: https://blog.wwdab.cn/
             Chrrg: https://github.com/chrrg
             Flylai: https://flylai.com/
             Sling: https://sling0318.github.io/
+            神代夕綺: https://kira.cool
      # Recent posts widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
