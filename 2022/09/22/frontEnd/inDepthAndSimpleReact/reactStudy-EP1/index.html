@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>EP01 JSX 代码是如何“摇身一变”成为 DOM 的？ - 坐和放宽</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="ZhangLK"><meta name="msapplication-TileImage" content="https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ZhangLK"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="JSX 代码是如何“摇身一变”成为 DOM 的？"><meta property="og:type" content="blog"><meta property="og:title" content="EP01 JSX 代码是如何“摇身一变”成为 DOM 的？"><meta property="og:url" content="http://zzzhanglk.github.io/2022/09/22/frontEnd/inDepthAndSimpleReact/reactStudy-EP1/"><meta property="og:site_name" content="坐和放宽"><meta property="og:description" content="JSX 代码是如何“摇身一变”成为 DOM 的？"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://s0.lgstatic.com/i/image/M00/5C/73/CgqCHl-BegWAbxNEAAH9HxafvWE988.png"><meta property="og:image" content="https://s0.lgstatic.com/i/image/M00/5C/73/CgqCHl-Beg-AXBihAA4t3S7nxKc532.png"><meta property="og:image" content="https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BeuGAepNsAACqreYXrj0410.png"><meta property="og:image" content="https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BevGANuu4AACN5mBDMlg569.png"><meta property="og:image" content="https://s0.lgstatic.com/i/image/M00/5C/74/CgqCHl-Bex6AM5rhAACJMrix5bk913.png"><meta property="og:image" content="https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BezKAW4rXAAIUYQW6Lk0911.png"><meta property="article:published_time" content="2022-09-21T16:00:00.000Z"><meta property="article:modified_time" content="2022-09-22T10:40:56.197Z"><meta property="article:author" content="ZhangLK"><meta property="article:tag" content="JavaScript"><meta property="article:tag" content="React"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://s0.lgstatic.com/i/image/M00/5C/73/CgqCHl-BegWAbxNEAAH9HxafvWE988.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://zzzhanglk.github.io/2022/09/22/frontEnd/inDepthAndSimpleReact/reactStudy-EP1/"},"headline":"EP01 JSX 代码是如何“摇身一变”成为 DOM 的？","image":["https://s0.lgstatic.com/i/image/M00/5C/73/CgqCHl-BegWAbxNEAAH9HxafvWE988.png","https://s0.lgstatic.com/i/image/M00/5C/73/CgqCHl-Beg-AXBihAA4t3S7nxKc532.png","https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BeuGAepNsAACqreYXrj0410.png","https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BevGANuu4AACN5mBDMlg569.png","https://s0.lgstatic.com/i/image/M00/5C/74/CgqCHl-Bex6AM5rhAACJMrix5bk913.png","https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BezKAW4rXAAIUYQW6Lk0911.png"],"datePublished":"2022-09-21T16:00:00.000Z","dateModified":"2022-09-22T10:40:56.197Z","author":{"@type":"Person","name":"ZhangLK"},"publisher":{"@type":"Organization","name":"坐和放宽","logo":{"@type":"ImageObject","url":"https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png"}},"description":"JSX 代码是如何“摇身一变”成为 DOM 的？"}</script><link rel="canonical" href="http://zzzhanglk.github.io/2022/09/22/frontEnd/inDepthAndSimpleReact/reactStudy-EP1/"><link rel="icon" href="https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 6.0.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png" alt="坐和放宽" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ZzzhangLK"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-09-21T16:00:00.000Z" title="2022/9/22 上午12:00:00">2022-09-22</time>发表</span><span class="level-item"><time dateTime="2022-09-22T10:40:56.197Z" title="2022/9/22 下午6:40:56">2022-09-22</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/frontEnd/">frontEnd</a></span><span class="level-item">26 分钟读完 (大约3963个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">EP01 JSX 代码是如何“摇身一变”成为 DOM 的？</h1><div class="content"><h3 id="JSX-代码是如何“摇身一变”成为-DOM-的？"><a href="#JSX-代码是如何“摇身一变”成为-DOM-的？" class="headerlink" title="JSX 代码是如何“摇身一变”成为 DOM 的？"></a>JSX 代码是如何“摇身一变”成为 DOM 的？</h3><span id="more"></span>
+
+<p data-nodeid="1113" class="">时下虽然接入 JSX 语法的框架越来越多，但与之缘分最深的毫无疑问仍然是 React。2013 年，当 React 带着 JSX 横空出世时，社区曾对 JSX 有过不少的争议，但如今，越来越多的人面对 JSX 都要说上一句“真香”！本课时我们就来一起认识下这个“真香”的 JSX，聊一聊“JSX 代码是如何‘摇身一变’成为 DOM 的”。</p>
+<h3 data-nodeid="1114">关于 JSX 的 3 个“大问题”</h3>
+<p data-nodeid="1115">在日常的 React 开发工作中，我们已经习惯了使用 JSX 来描述 React 的组件内容。关于 JSX 语法本身，相信每位 React 开发者都不陌生。这里我用一个简单的 React 组件，来帮你迅速地唤醒自己脑海中与 JSX 相关的记忆。下面这个组件中的 render 方法返回值，就是用 JSX 代码来填充的：</p>
+<pre class="lang-js" data-nodeid="1116"><code data-language="js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom"</span>;
+
+<p><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;<br>  render() &#123;<br>    <span class="hljs-keyword">return</span> (<br>      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>&#x3D;<span class="hljs-string">“App”</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>&#x3D;<span class="hljs-string">“title”</span>&gt;</span>I am the title<span class="hljs-tag">&lt;&#x2F;<span class="hljs-name">h1</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>&#x3D;<span class="hljs-string">“content”</span>&gt;</span>I am the content<span class="hljs-tag">&lt;&#x2F;<span class="hljs-name">p</span>&gt;</span><br>      <span class="hljs-tag">&lt;&#x2F;<span class="hljs-name">div</span>&gt;</span></span><br>    );<br>  &#125;<br>&#125;</p>
+<p><span class="hljs-keyword">const</span> rootElement &#x3D; <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">“root”</span>);<br>ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> &#x2F;&gt;</span></span>, rootElement);<br></code></pre></p>
+<p data-nodeid="1117">由于本专栏的整体目标是帮助你在 React 这个领域完成从“小工”到“行家”的进阶，此处我无意再去带你反复咀嚼 JSX 的基础语法，而是希望能够引导你去探寻 JSX 背后的故事。针对这“背后的故事”，我总结了 3 个最具代表性和区分度的问题。</p>
+<p data-nodeid="1118">在开始正式讲解之前，我希望你能在自己心中尝试回答这 3 个问题：</p>
+<ul data-nodeid="1119">
+<li data-nodeid="1120">
+<p data-nodeid="1121">JSX 的本质是什么，它和 JS 之间到底是什么关系？</p>
+</li>
+<li data-nodeid="1122">
+<p data-nodeid="1123">为什么要用 JSX？不用会有什么后果？</p>
+</li>
+<li data-nodeid="1124">
+<p data-nodeid="1125">JSX 背后的功能模块是什么，这个功能模块都做了哪些事情？</p>
+</li>
+</ul>
+<p data-nodeid="1126">面对以上问题，如果你无法形成清晰且系统的思路，那么很可能是你把 JSX 想得过于简单了。大多数人只是简单地把它理解为模板语法的一种，但事实上，JSX 作为 React 框架的一大特色，它与 React 本身的运作机制之间存在着千丝万缕的联系。</p>
+<p data-nodeid="1127">上述 3 个问题的答案，就恰恰隐藏在这层“联系”中，在面试场景下，候选人对这层“联系”吃得透不透，是我们评价其在 React 方面是否“资深”的一个重要依据。</p>
+<p data-nodeid="1128">接下来，我就将带你由表及里地起底 JSX 相关的底层原理，帮助你吃透这层“联系”，建立起强大的理论自信。你可以将“能够用自己的话回答上面 3 个问题”来作为本课时的学习目标，待课时结束后，记得回来检验自己的学习成果^_^。</p>
+<h3 data-nodeid="1129">JSX 的本质：JavaScript 的语法扩展</h3>
+<p data-nodeid="1130">JSX 到底是什么，我们先来看看 <a target="_blank" rel="noopener" href="https://reactjs.org/docs/glossary.html#jsx" data-nodeid="1217">React 官网</a>给出的一段定义：</p>
+<blockquote data-nodeid="1131">
+<p data-nodeid="1132">JSX 是 JavaScript 的一种语法扩展，它和模板语言很接近，但是它充分具备 JavaScript 的能力。</p>
+</blockquote>
+<p data-nodeid="1133">“语法扩展”这一点在理解上几乎不会产生歧义，不过“它充分具备 JavaScript 的能力”这句，却总让人摸不着头脑，JSX 和 JS 怎么看也不像是一路人啊？这就引出了“<strong data-nodeid="1225">JSX 语法是如何在 JavaScript 中生效的</strong>”这个问题。</p>
+<h4 data-nodeid="1134">JSX 语法是如何在 JavaScript 中生效的：认识 Babel</h4>
+<p data-nodeid="1135">Facebook 公司给 JSX 的定位是 JavaScript 的“扩展”，而非 JavaScript 的“某个版本”，这就直接决定了浏览器并不会像天然支持 JavaScript 一样地支持 JSX。那么，JSX 的语法是如何在 JavaScript 中生效的呢？<a target="_blank" rel="noopener" href="https://reactjs.org/docs/glossary.html#jsx" data-nodeid="1230">React 官网</a>其实早已给过我们线索：</p>
+<blockquote data-nodeid="1136">
+<p data-nodeid="1137">JSX 会被编译为 React.createElement()，&nbsp;React.createElement() 将返回一个叫作“React Element”的 JS 对象。</p>
+</blockquote>
+<p data-nodeid="1138">这里提到，JSX 在被<strong data-nodeid="1238">编译</strong>后，会变成一个针对 React.createElement 的调用，此时你大可不必急于关注 React.createElement 这个 API 到底做了什么（下文会单独讲解）。咱们先来说说这个“编译”是怎么回事：“编译”这个动作，是由 Babel 来完成的。</p>
+<p data-nodeid="1139"><strong data-nodeid="1242">什么是 Babel 呢？</strong></p>
+<blockquote data-nodeid="1140">
+<p data-nodeid="1141">Babel 是一个工具链，主要用于将 ECMAScript 2015+ 版本的代码转换为向后兼容的 JavaScript 语法，以便能够运行在当前和旧版本的浏览器或其他环境中。<br>
+—— Babel 官网</p>
+</blockquote>
+<p data-nodeid="1142">比如说，ES2015+ 版本推出了一种名为“模板字符串”的新语法，这种语法在一些低版本的浏览器里并不兼容。下面是一段模板字符串的示例代码：</p>
+<pre class="lang-java" data-nodeid="1143"><code data-language="java"><span class="hljs-keyword">var</span> name = <span class="hljs-string">"Guy Fieri"</span>;
+<span class="hljs-keyword">var</span> place = <span class="hljs-string">"Flavortown"</span>;
+`Hello $&#123;name&#125;, ready <span class="hljs-keyword">for</span> $&#123;place&#125;?`;
+</code></pre>
+<p data-nodeid="1144">Babel 就可以帮我们把这段代码转换为大部分低版本浏览器也能够识别的 ES5 代码：</p>
+<pre class="lang-java" data-nodeid="1145"><code data-language="java"><span class="hljs-keyword">var</span> name = <span class="hljs-string">"Guy Fieri"</span>;
+<span class="hljs-keyword">var</span> place = <span class="hljs-string">"Flavortown"</span>;
+<span class="hljs-string">"Hello "</span>.concat(name, <span class="hljs-string">", ready for "</span>).concat(place, <span class="hljs-string">"?"</span>);
+</code></pre>
+<p data-nodeid="1146">类似的，<strong data-nodeid="1255">Babel 也具备将 JSX 语法转换为 JavaScript 代码的能力</strong>。<br>
+那么 Babel 具体会将 JSX 处理成什么样子呢？我们不如直接打开 Babel 的 playground 来看一看。这里我仍然键入文章开头示例代码中的JSX 部分：</p>
+<p data-nodeid="1147"><img src="https://s0.lgstatic.com/i/image/M00/5C/73/CgqCHl-BegWAbxNEAAH9HxafvWE988.png" alt="Drawing 0.png" data-nodeid="1258"></p>
+<p data-nodeid="1148">可以看到，所有的 JSX 标签都被转化成了 React.createElement 调用，这也就意味着，我们写的 JSX 其实写的就是 React.createElement，虽然它看起来有点像 HTML，但也只是“看起来像”而已。<strong data-nodeid="1272">JSX 的本质是</strong>React.createElement<strong data-nodeid="1273">这个 JavaScript 调用的语法糖</strong>，这也就完美地呼应上了 React 官方给出的“<strong data-nodeid="1274">JSX 充分具备 JavaScript 的能力</strong>”这句话。</p>
+<h4 data-nodeid="1149">React 选用 JSX 语法的动机</h4>
+<p data-nodeid="1150">换个角度想想，既然 JSX 等价于一次 React.createElement 调用，那么 React 官方为什么不直接引导我们用 React.createElement 来创建元素呢？</p>
+<p data-nodeid="1151">原因非常简单，我们来看一个相对复杂一些的组件的 JSX 代码和 React.createElement 调用之间的对比。它们各自的形态如下图所示，图中左侧是 JSX 代码，右侧是 React.createElement 调用：</p>
+<p data-nodeid="1152"><img src="https://s0.lgstatic.com/i/image/M00/5C/73/CgqCHl-Beg-AXBihAA4t3S7nxKc532.png" alt="Drawing 1.png" data-nodeid="1280"></p>
+<p data-nodeid="1153">你会发现，在实际功能效果一致的前提下，JSX 代码层次分明、嵌套关系清晰；而 React.createElement 代码则给人一种非常混乱的“杂糅感”，这样的代码不仅读起来不友好，写起来也费劲。</p>
+<p data-nodeid="1154"><strong data-nodeid="1285">JSX 语法糖允许前端开发者使用我们最为熟悉的类 HTML 标签语法来创建虚拟 DOM，在降低学习成本的同时，也提升了研发效率与研发体验。</strong></p>
+<p data-nodeid="1155">读到这里，相信你已经充分理解了“<strong data-nodeid="1291">JSX 是 JavaScript 的一种语法扩展，它和模板语言很接近，但是它充分具备 JavaScript 的能力</strong>。&nbsp;”这一定义背后的深意。那么我们文中反复提及的 React.createElement 又是何方神圣呢？下面我们就深入相关源码来一窥究竟。</p>
+<h3 data-nodeid="1156">JSX 是如何映射为 DOM 的：起底 createElement 源码</h3>
+<p data-nodeid="1157">在分析开始之前，你可以先尝试阅读我追加进源码中的逐行代码解析，大致理解 createElement 中每一行代码的作用：</p>
+<pre class="lang-java te-preview-highlight" data-nodeid="2505"><code data-language="java"><span class="hljs-comment">/**
+ 101. React的创建元素方法
+ */</span>
+<span class="hljs-function">export function <span class="hljs-title">createElement</span><span class="hljs-params">(type, config, children)</span> </span>&#123;
+  <span class="hljs-comment">// propName 变量用于储存后面需要用到的元素属性</span>
+  let propName; 
+  <span class="hljs-comment">// props 变量用于储存元素属性的键值对集合</span>
+  <span class="hljs-keyword">const</span> props = &#123;&#125;; 
+  <span class="hljs-comment">// key、ref、self、source 均为 React 元素的属性，此处不必深究</span>
+  let key = <span class="hljs-keyword">null</span>;
+  let ref = <span class="hljs-keyword">null</span>; 
+  let self = <span class="hljs-keyword">null</span>; 
+  let source = <span class="hljs-keyword">null</span>; 
+
+<p>  <span class="hljs-comment">&#x2F;&#x2F; config 对象中存储的是元素的属性</span><br>  <span class="hljs-keyword">if</span> (config !&#x3D; <span class="hljs-keyword">null</span>) &#123;<br>    <span class="hljs-comment">&#x2F;&#x2F; 进来之后做的第一件事，是依次对 ref、key、self 和 source 属性赋值</span><br>    <span class="hljs-keyword">if</span> (hasValidRef(config)) &#123;<br>      ref &#x3D; config.ref;<br>    &#125;<br>    <span class="hljs-comment">&#x2F;&#x2F; 此处将 key 值字符串化</span><br>    <span class="hljs-keyword">if</span> (hasValidKey(config)) &#123;<br>      key &#x3D; <span class="hljs-string">‘’</span> + config.key;<br>    &#125;<br>    self &#x3D; config.__self &#x3D;&#x3D;&#x3D; undefined ? <span class="hljs-keyword">null</span> : config.__self;<br>    source &#x3D; config.__source &#x3D;&#x3D;&#x3D; undefined ? <span class="hljs-keyword">null</span> : config.__source;<br>    <span class="hljs-comment">&#x2F;&#x2F; 接着就是要把 config 里面的属性都一个一个挪到 props 这个之前声明好的对象里面</span><br>    <span class="hljs-keyword">for</span> (propName in config) &#123;<br>      <span class="hljs-keyword">if</span> (<br>        <span class="hljs-comment">&#x2F;&#x2F; 筛选出可以提进 props 对象里的属性</span><br>        hasOwnProperty.call(config, propName) &amp;&amp;<br>        !RESERVED_PROPS.hasOwnProperty(propName)<br>      ) &#123;<br>        props[propName] &#x3D; config[propName];<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-comment">&#x2F;&#x2F; childrenLength 指的是当前元素的子元素的个数，减去的 2 是 type 和 config 两个参数占用的长度</span><br>  <span class="hljs-keyword">const</span> childrenLength &#x3D; arguments.length - <span class="hljs-number">2</span>;<br>  <span class="hljs-comment">&#x2F;&#x2F; 如果抛去type和config，就只剩下一个参数，一般意味着文本节点出现了</span><br>  <span class="hljs-keyword">if</span> (childrenLength &#x3D;&#x3D;&#x3D; <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-comment">&#x2F;&#x2F; 直接把这个参数的值赋给props.children</span><br>    props.children &#x3D; children;<br>    <span class="hljs-comment">&#x2F;&#x2F; 处理嵌套多个子元素的情况</span><br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (childrenLength &gt; <span class="hljs-number">1</span>) &#123;<br>    <span class="hljs-comment">&#x2F;&#x2F; 声明一个子元素数组</span><br>    <span class="hljs-keyword">const</span> childArray &#x3D; Array(childrenLength);<br>    <span class="hljs-comment">&#x2F;&#x2F; 把子元素推进数组里</span><br>    <span class="hljs-keyword">for</span> (let i &#x3D; <span class="hljs-number">0</span>; i &lt; childrenLength; i++) &#123;<br>      childArray[i] &#x3D; arguments[i + <span class="hljs-number">2</span>];<br>    &#125;<br>    <span class="hljs-comment">&#x2F;&#x2F; 最后把这个数组赋值给props.children</span><br>    props.children &#x3D; childArray;<br>  &#125; </p>
+<p>  <span class="hljs-comment">&#x2F;&#x2F; 处理 defaultProps</span><br>  <span class="hljs-keyword">if</span> (type &amp;&amp; type.defaultProps) &#123;<br>    <span class="hljs-keyword">const</span> defaultProps &#x3D; type.defaultProps;<br>    <span class="hljs-keyword">for</span> (propName in defaultProps) &#123;<br>      <span class="hljs-keyword">if</span> (props[propName] &#x3D;&#x3D;&#x3D; undefined) &#123;<br>        props[propName] &#x3D; defaultProps[propName];<br>      &#125;<br>    &#125;<br>  &#125;</p>
+<p>  <span class="hljs-comment">&#x2F;&#x2F; 最后返回一个调用ReactElement执行方法，并传入刚才处理过的参数</span><br>  <span class="hljs-keyword">return</span> ReactElement(<br>    type,<br>    key,<br>    ref,<br>    self,<br>    source,<br>    ReactCurrentOwner.current,<br>    props,<br>  );<br>&#125;<br></code></pre></p>
+<p data-nodeid="1159">上面是对源码细节的初步展示，接下来我会带你逐步提取源码中的关键知识点和核心思想。</p>
+<h4 data-nodeid="1160">入参解读：创造一个元素需要知道哪些信息</h4>
+<p data-nodeid="1161">我们先来看看方法的入参：</p>
+<pre class="lang-java" data-nodeid="1162"><code data-language="java"><span class="hljs-function">export function <span class="hljs-title">createElement</span><span class="hljs-params">(type, config, children)</span>
+</span></code></pre>
+<p data-nodeid="1163">createElement 有 3 个入参，这 3 个入参囊括了 React 创建一个元素所需要知道的全部信息。</p>
+<ul data-nodeid="1164">
+<li data-nodeid="1165">
+<p data-nodeid="1166">type：用于标识节点的类型。它可以是类似“h1”“div”这样的标准 HTML 标签字符串，也可以是 React 组件类型或 React fragment 类型。</p>
+</li>
+<li data-nodeid="1167">
+<p data-nodeid="1168">config：以对象形式传入，组件所有的属性都会以键值对的形式存储在 config 对象中。</p>
+</li>
+<li data-nodeid="1169">
+<p data-nodeid="1170">children：以对象形式传入，它记录的是组件标签之间嵌套的内容，也就是所谓的“子节点”“子元素”。</p>
+</li>
+</ul>
+<p data-nodeid="1171">如果文字描述使你觉得抽象，下面这个调用示例可以帮你增进对概念的理解：</p>
+<pre class="lang-java" data-nodeid="1172"><code data-language="java">React.createElement(<span class="hljs-string">"ul"</span>, &#123;
+  <span class="hljs-comment">// 传入属性键值对</span>
+  className: <span class="hljs-string">"list"</span>
+   <span class="hljs-comment">// 从第三个入参开始往后，传入的参数都是 children</span>
+&#125;, React.createElement(<span class="hljs-string">"li"</span>, &#123;
+  key: <span class="hljs-string">"1"</span>
+&#125;, <span class="hljs-string">"1"</span>), React.createElement(<span class="hljs-string">"li"</span>, &#123;
+  key: <span class="hljs-string">"2"</span>
+&#125;, <span class="hljs-string">"2"</span>));
+</code></pre>
+<p data-nodeid="1173">这个调用对应的 DOM 结构如下：</p>
+<pre class="lang-js" data-nodeid="1174"><code data-language="js">&lt;ul className=<span class="hljs-string">"list"</span>&gt;
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">"1"</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">"2"</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+&lt;/ul&gt;
+</code></pre>
+<p data-nodeid="1175">对入参的形式和内容有了大致的把握之后，下面我们继续来讲解 createElement 的函数逻辑。</p>
+<h4 data-nodeid="1176">createElement 函数体拆解</h4>
+<p data-nodeid="1177" class="">前面你已经阅读过 createElement 源码细化到每一行的解读，这里我想和你探讨的是 createElement<strong data-nodeid="1310">在逻辑层面的任务流转</strong>。针对这个过程，我为你总结了下面这张流程图：</p>
+<p data-nodeid="1178"><img src="https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BeuGAepNsAACqreYXrj0410.png" alt="Drawing 3.png" data-nodeid="1313"></p>
+<p data-nodeid="1179">这个流程图，或许会打破不少同学对 createElement 的幻想。<strong data-nodeid="1323">在实际的面试场景下，许多候选人由于缺乏对源码的了解，谈及 createElement 时总会倾向于去夸大它的“工作量”</strong>。但其实，相信你也已经发现了，createElement 中并没有十分复杂的涉及算法或真实 DOM 的逻辑，它的<strong data-nodeid="1324">每一个步骤几乎都是在格式化数据</strong>。</p>
+<p data-nodeid="1180">说得更直白点，createElement 就像是开发者和 ReactElement 调用之间的一个“<strong data-nodeid="1334">转换器</strong>”、一个<strong data-nodeid="1335">数据处理层</strong>。它可以从开发者处接受相对简单的参数，然后将这些参数按照 ReactElement 的预期做一层格式化，最终通过调用 ReactElement 来实现元素的创建。整个过程如下图所示：</p>
+<p data-nodeid="1181"><img src="https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BevGANuu4AACN5mBDMlg569.png" alt="Drawing 5.png" data-nodeid="1338"></p>
+<p data-nodeid="1182">现在看来，createElement 原来只是个“参数中介”。此时我们的注意力自然而然地就聚焦在了 ReactElement 上，接下来我们就乘胜追击，一起去挖一挖 ReactElement 的源码吧！</p>
+<h4 data-nodeid="1183">出参解读：初识虚拟 DOM</h4>
+<p data-nodeid="1184">上面已经分析过，createElement 执行到最后会 return 一个针对 ReactElement 的调用。这里关于 ReactElement，我依然先给出源码 + 注释形式的解析：</p>
+<pre class="lang-java" data-nodeid="1185"><code data-language="java"><span class="hljs-keyword">const</span> ReactElement = function(type, key, ref, self, source, owner, props) &#123;
+  <span class="hljs-keyword">const</span> element = &#123;
+    <span class="hljs-comment">// REACT_ELEMENT_TYPE是一个常量，用来标识该对象是一个ReactElement</span>
+    $$typeof: REACT_ELEMENT_TYPE,
+
+<pre><code>&lt;span class=&quot;hljs-comment&quot;&gt;// 内置属性赋值&lt;/span&gt;
+type: type,
+key: key,
+ref: ref,
+props: props,
+
+&lt;span class=&quot;hljs-comment&quot;&gt;// 记录创造该元素的组件&lt;/span&gt;
+_owner: owner,
+</code></pre>
+<p>  };</p>
+<p>  <span class="hljs-comment">&#x2F;&#x2F; </span><br>  <span class="hljs-keyword">if</span> (<strong>DEV</strong>) {<br>    <span class="hljs-comment">&#x2F;&#x2F; 这里是一些针对 <strong>DEV</strong> 环境下的处理，对于大家理解主要逻辑意义不大，此处我直接省略掉，以免混淆视听</span><br>  }</p>
+<p>  <span class="hljs-keyword">return</span> element;<br>};<br></code></pre></p>
+<p data-nodeid="1186">ReactElement 的代码出乎意料的简短，从逻辑上我们可以看出，ReactElement 其实只做了一件事情，那就是“<strong data-nodeid="1351">创建</strong>”，说得更精确一点，是“<strong data-nodeid="1352">组装</strong>”：ReactElement 把传入的参数按照一定的规范，“组装”进了 element 对象里，并把它返回给了 React.createElement，最终 React.createElement 又把它交回到了开发者手中。整个过程如下图所示：</p>
+<p data-nodeid="1187"><img src="https://s0.lgstatic.com/i/image/M00/5C/74/CgqCHl-Bex6AM5rhAACJMrix5bk913.png" alt="Drawing 7.png" data-nodeid="1355"></p>
+<p data-nodeid="1188">如果你想要验证这一点，可以尝试输出我们示例中 App 组件的 JSX 部分：</p>
+<pre class="lang-js" data-nodeid="1189"><code data-language="js"><span class="hljs-keyword">const</span> AppJSX = (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"App"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"title"</span>&gt;</span>I am the title<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"content"</span>&gt;</span>I am the content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>)
+
+<p><span class="hljs-built_in">console</span>.log(AppJSX)<br></code></pre></p>
+<p data-nodeid="1190">你会发现它确实是一个标准的 ReactElement 对象实例，如下图（生产环境下的输出结果）所示：</p>
+<p data-nodeid="1191"><img src="https://s0.lgstatic.com/i/image/M00/5C/69/Ciqc1F-BezKAW4rXAAIUYQW6Lk0911.png" alt="Drawing 8.png" data-nodeid="1360"></p>
+<p data-nodeid="1192">这个 ReactElement 对象实例，本质上是<strong data-nodeid="1370">以 JavaScript 对象形式存在的对 DOM 的描述</strong>，也就是老生常谈的“虚拟 DOM”（<strong data-nodeid="1371">准确地说，是虚拟 DOM 中的一个节点</strong>。关于虚拟 DOM， 我们将在专栏的“模块二：核心原理”中花大量的篇幅来研究它，此处你只需要能够结合源码，形成初步认知即可）。</p>
+<p data-nodeid="1193">既然是“虚拟 DOM”，那就意味着和渲染到页面上的真实 DOM 之间还有一些距离，这个“距离”，就是由大家喜闻乐见的<strong data-nodeid="1377">ReactDOM.render</strong>方法来填补的。</p>
+<p data-nodeid="1194">在每一个 React 项目的入口文件中，都少不了对 React.render 函数的调用。下面我简单介绍下 ReactDOM.render 方法的入参规则：</p>
+<pre class="lang-java" data-nodeid="1195"><code data-language="java">ReactDOM.render(
+    <span class="hljs-comment">// 需要渲染的元素（ReactElement）</span>
+    element, 
+    <span class="hljs-comment">// 元素挂载的目标容器（一个真实DOM）</span>
+    container,
+    <span class="hljs-comment">// 回调函数，可选参数，可以用来处理渲染结束后的逻辑</span>
+    [callback]
+)
+</code></pre>
+<p data-nodeid="1196">ReactDOM.render 方法可以接收 3 个参数，其中<strong data-nodeid="1388">第二个参数就是一个真实的 DOM 节点</strong>，<strong data-nodeid="1389">这个真实的 DOM 节点充当“容器”的角色</strong>，React 元素最终会被渲染到这个“容器”里面去。比如，示例中的 App 组件，它对应的 render 调用是这样的：</p>
+<pre class="lang-java" data-nodeid="1197"><code data-language="java"><span class="hljs-keyword">const</span> rootElement = document.getElementById(<span class="hljs-string">"root"</span>);
+ReactDOM.render(&lt;App /&gt;, rootElement);
+</code></pre>
+<p data-nodeid="1198">注意，这个真实 DOM 一定是确实存在的。比如，在 App 组件对应的 index.html 中，已经提前预置 了 id 为 root 的根节点：</p>
+<pre class="lang-js" data-nodeid="1199"><code data-language="js">&lt;body&gt;
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+&lt;/body&gt;
+</code></pre></div><div class="article-licensing box"><div class="licensing-title"><p>EP01 JSX 代码是如何“摇身一变”成为 DOM 的？</p><p><a href="http://zzzhanglk.github.io/2022/09/22/frontEnd/inDepthAndSimpleReact/reactStudy-EP1/">http://zzzhanglk.github.io/2022/09/22/frontEnd/inDepthAndSimpleReact/reactStudy-EP1/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>ZhangLK</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-09-22</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-09-22</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/JavaScript/">JavaScript</a><a class="link-muted mr-2" rel="tag" href="/tags/React/">React</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/wechat.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/09/20/frontEnd/inDepthAndSimpleReact/reactStudy-EP0/"><span class="level-item">【深入浅出搞定 React】这一次，真正吃透 React 知识链路与底层逻辑</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Finance/"><span class="level-start"><span class="level-item">Finance</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/categories/FrontEnd/"><span class="level-start"><span class="level-item">FrontEnd</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Thoughts/"><span class="level-start"><span class="level-item">Thoughts</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/article/"><span class="level-start"><span class="level-item">article</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/essay/"><span class="level-start"><span class="level-item">essay</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/frontEnd/"><span class="level-start"><span class="level-item">frontEnd</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/DOM%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/"><span class="tag">DOM编程艺术</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo/"><span class="tag">Hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo%E4%B8%BB%E9%A2%98/"><span class="tag">Hexo主题</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/JavaScript/"><span class="tag">JavaScript</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/blog/"><span class="tag">blog</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/blog-%E5%9B%BE%E5%BA%8A/"><span class="tag">blog - 图床</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8F%98%E9%87%8F%E5%92%8C%E7%B1%BB%E5%9E%8B/"><span class="tag">变量和类型</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%9B%BE%E5%BA%8A/"><span class="tag">图床</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%89%BE%E5%B7%A5%E4%BD%9C/"><span class="tag">找工作</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%80%83%E7%A0%94/"><span class="tag">考研</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%BD%AC%E8%BD%BD/"><span class="tag">转载</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%87%8D%E5%AD%A6JS/"><span class="tag">重学JS</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%87%91%E8%9E%8D/"><span class="tag">金融</span><span class="tag">10</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9A%8F%E6%83%B3/"><span class="tag">随想</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9A%8F%E7%AC%94/"><span class="tag">随笔</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9D%A2%E8%AF%95/"><span class="tag">面试</span><span class="tag">1</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-21T16:00:00.000Z">2022-09-22</time></p><p class="title"><a href="/2022/09/22/frontEnd/inDepthAndSimpleReact/reactStudy-EP1/">EP01 JSX 代码是如何“摇身一变”成为 DOM 的？</a></p><p class="categories"><a href="/categories/frontEnd/">frontEnd</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-09-19T16:00:00.000Z">2022-09-20</time></p><p class="title"><a href="/2022/09/20/frontEnd/inDepthAndSimpleReact/reactStudy-EP0/">【深入浅出搞定 React】这一次，真正吃透 React 知识链路与底层逻辑</a></p><p class="categories"><a href="/categories/frontEnd/">frontEnd</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-31T16:00:00.000Z">2022-06-01</time></p><p class="title"><a href="/2022/06/01/frontEnd/JSvarletconst/">浅谈JavaScript的 var, const, let</a></p><p class="categories"><a href="/categories/frontEnd/">frontEnd</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-18T04:12:12.000Z">2022-05-18</time></p><p class="title"><a href="/2022/05/18/thoughts/jsdelivr-alt/">jsDelivr大面积失效，个人站点该怎么办？</a></p><p class="categories"><a href="/categories/Thoughts/">Thoughts</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-11T16:00:00.000Z">2022-05-12</time></p><p class="title"><a href="/2022/05/12/frontEnd/commonJSmethod/">常用的前端JavaScript方法封装</a></p><p class="categories"><a href="/categories/frontEnd/">frontEnd</a></p></div></article></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://fastly.jsdelivr.net/gh/ZzzhangLK/Image-Hosting-Service/img/avtor.png" alt="坐和放宽" height="28"></a><p class="is-size-7"><span>&copy; 2022 ZhangLK</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ZzzhangLK"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
