@@ -20,6 +20,8 @@ categories:
 - {% post_link frontEnd/inDepthAndSimpleReact/reactStudy-EP1 %}
 - {% post_link frontEnd/inDepthAndSimpleReact/reactStudy-EP2 %}
 - {% post_link frontEnd/inDepthAndSimpleReact/reactStudy-EP3 %}
+- {% post_link frontEnd/inDepthAndSimpleReact/reactStudy-EP4 %}
+- {% post_link frontEnd/inDepthAndSimpleReact/reactStudy-EP5 %}
 
 <p data-nodeid="841" class="">在接下来的一段时间里，我们将一起深入 React 这个框架领域，完成从“小工”到“专家”的蜕变。</p>
 <p data-nodeid="842">作为一名React 重度用户，与其说我对 React 源码、底层原理及周边生态有着较为深入的探究，不如说我对它们有着浓厚的兴趣。早期，我专注于性能优化和前端工程化，曾将线上大型应用性能提升率做到 40%，并基于 React 打造过团队新基建。此外，我还担任过多年一线前端面试官，积累了丰富的面试经验。</p>
