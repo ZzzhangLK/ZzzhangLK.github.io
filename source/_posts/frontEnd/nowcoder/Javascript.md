@@ -1,6 +1,6 @@
 ---
 title: JavaScript专项练习 错题本
-date: 2022-12-12
+date: 2023-01-01
 tags:
     - JavaScript
     - 专项练习
@@ -37,7 +37,7 @@ categories:
 
 #### 8、[JavaScript 中的数字在计算机内存中占8个Byte](https://www.nowcoder.com/questionTerminal/e6a69b9b36f04f019e78353d316c023d)
 
-#### 9、[JavaScript中的内部对象](https://www.nowcoder.com/questionTerminal/b458263e804a4234a36ff54f4cab03de)
+#### 9、[JavaScript 中的内部对象](https://www.nowcoder.com/questionTerminal/b458263e804a4234a36ff54f4cab03de)
 
 * Navagator：提供有关浏览器的信息；
 * Window：Window对象处于对象层次的最顶层，它提供了处理Navagator窗口的方法和属性；
