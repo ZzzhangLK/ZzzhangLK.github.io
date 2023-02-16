@@ -1,6 +1,6 @@
 ---
-title: JavaScript专项练习 错题本
-date: 2023-01-01
+title: 🧑‍💻JavaScript专项练习 错题本 🔝
+date: 2024-01-01
 tags:
     - JavaScript
     - 专项练习
