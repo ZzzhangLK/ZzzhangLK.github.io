@@ -53,7 +53,9 @@ Hooks 函数只能在函数组件内部使用，不可在函数组件外或者�
     <br /><br />ES6：copyWithin、fill、find、findIndex、includes
 
 13. 追问：如果我要生成一个长度为10的随机数数组，只用一行代码，应该怎么做？
-    > new Array(10).fill(0).map(item => Math.random())
+    ```js
+    new Array(10).fill(0).map(item => Math.random())
+    ```
 
 14. 追问：为什么这里要用fill(0)？
     > 因为当使用 new Array(10) 创建数组时，实际上是创建一个空的数组对象，属性 length = 10。除此以外，这个对象是一个空对象。对象中并没有数组对应的索引键（index key）
@@ -61,7 +63,12 @@ Hooks 函数只能在函数组件内部使用，不可在函数组件外或者�
     <br /><br />为了解决这个问题，可以使用 fill() 方法来填充数组，然后再使用 map() 方法。例如：new Array(10).fill(0).map(() => Math.random())
 
 15. 引申：如果我要生成一个长度为10的随机数数组，只用一行代码，且每个元素的值都不相同，应该怎么做？
-    > new Array(10).fill(0).map(() => Math.random()).sort(() => Math.random() - 0.5)
+    ```js
+    let arr = new Array(10).fill(0).map(i=>Math.floor(Math.random() * 10));
+    while (new Set(arr).size !== arr.length) {
+        arr = new Array(10).fill(0).map(i=>Math.floor(Math.random() * 10));
+    }
+    ```
 
 16. 谈谈你对前端设计模式的理解
     > 前端设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。前端常见的设计模式有以下几种
