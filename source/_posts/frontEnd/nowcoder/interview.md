@@ -21,6 +21,17 @@ categories:
    > 事件循环是一种处理异步操作的机制，它可以让我们在代码执行过程中处理异步任务，比如网络请求、定时器和用户交互等。事件循环的执行顺序是：首先执行同步代码，然后执行异步代码。当 JavaScript 引擎遇到需要等待的操作时，如 I/O 操作、setTimeout 等异步操作，它会将这些操作加入到任务队列中，等待下一次事件循环时执行。
 4. 请解释什么是宏任务和微任务？
    > 宏任务和微任务都是异步任务。宏任务包括：script（整体代码）、setTimeout、setInterval、I/O 操作、UI 渲染等；微任务包括：Promise、process.nextTick、Object.observe、MutationObserver 等。在每次事件循环中，宏任务会优先于微任务执行。
+5. 在JavaScript中，Object类的方法作用有哪些？
+   > - Object.assign()：将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
+   > - Object.create()：使用指定的原型对象和属性创建一个新对象。
+   > - Object.defineProperty()：定义一个新属性或修改现有属性，并指定该属性的描述符。
+   > - Object.defineProperties()：定义一个或多个新属性或修改现有属性，并指定这些属性的描述符。
+   > - Object.entries()：返回给定对象自身可枚举属性的键值对数组，其排列与使用 for…in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还枚举原型链中的属性）。
+   > - Object.freeze()：冻结一个对象。一个被冻结的对象再也不能被修改；冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，不能修改已有属性，不能修改该对象已有属性的可枚举性、可配置性、可写性。该方法返回被冻结的对象。
+   > - Object.fromEntries()：把键值对列表转换为一个对象。
+   > - Object.getOwnPropertyDescriptor()：返回指定对象上一个自有属性对应的属性描述符。
+   > - Object.getOwnPropertyDescriptors()：返回指定对象上所有自有属性（非继承属性）对应的属性描述符。
+   > - Object.getOwnPropertyNames()：返回一个数组，它包含了指定对象所有自身属性（非继承属性）的名称（不包含 Symbol 类型的属性）。 4
 
 ### 原型链相关
 1. 谈谈你对原型链的理解
