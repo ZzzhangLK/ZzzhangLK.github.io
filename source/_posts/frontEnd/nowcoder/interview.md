@@ -17,6 +17,10 @@ categories:
    > 基本数据类型：Undefined、Null、Boolean、Number、String、Symbol（ES6新增）;引用数据类型：Object、Array、Function、Date、RegExp、Error
 2. 基本数据类型和引用数据类型的区别
    > 基本数据类型存储在栈内存中，引用数据类型存储在堆内存中；基本数据类型的值是不可变的，引用数据类型的值是可变的；基本数据类型的比较是值的比较，引用数据类型的比较是引用的比较。
+3. 请解释什么是事件循环？
+   > 事件循环是一种处理异步操作的机制，它可以让我们在代码执行过程中处理异步任务，比如网络请求、定时器和用户交互等。事件循环的执行顺序是：首先执行同步代码，然后执行异步代码。当 JavaScript 引擎遇到需要等待的操作时，如 I/O 操作、setTimeout 等异步操作，它会将这些操作加入到任务队列中，等待下一次事件循环时执行。
+4. 请解释什么是宏任务和微任务？
+   > 宏任务和微任务都是异步任务。宏任务包括：script（整体代码）、setTimeout、setInterval、I/O 操作、UI 渲染等；微任务包括：Promise、process.nextTick、Object.observe、MutationObserver 等。在每次事件循环中，宏任务会优先于微任务执行。
 
 ### 原型链相关
 1. 谈谈你对原型链的理解
