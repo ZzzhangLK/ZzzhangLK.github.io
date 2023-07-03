@@ -164,3 +164,19 @@ categories:
    > - 优化（Optimization）：在 Webpack 开始优化编译时执行，用于优化编译结果等。
    > - 生成资源（Asset Generation）：在 Webpack 开始生成资源时执行，用于生成最终的资源文件等。
    > - 输出（Output）：在 Webpack 输出最终的资源文件前执行，用于处理输出结果等。
+
+## 其他
+### Gti
+1. git fetch和git merge的区别
+   > - git fetch：从远程获取最新版本到本地，不会自动merge。
+   > - git merge：将本地分支与远程分支合并。
+2. git回滚提交
+   > - git reset --hard HEAD^：回滚到上一个版本。
+   > - git reset --hard HEAD^^：回滚到上上一个版本。
+   > - git reset --hard HEAD~100：回滚到前100个版本。
+   > - git reset --hard commit_id：回滚到指定的版本。
+   > - git reset --hard：将HEAD指针指向另一个提交，并更改工作目录和暂存区域。
+   > - git checkout：检出以前的提交。这不会更改历史记录，但会更改工作目录和暂存区域。
+3. git reset和git revert的区别
+   > - git reset：回滚到指定的版本，会删除指定版本之后的所有提交记录，不可恢复。
+   > - git revert：回滚到指定的版本，会生成一个新的提交记录，可恢复。
