@@ -39,7 +39,9 @@ categories:
 5. 谈谈你对JavaScript的事件轮循的理解？
    > - JavaScript 是一门单线程语言，它的事件轮询机制是通过一个事件循环来实现的。浏览器通过事件队列来管理这些事件，当事件发生时，会将事件加入到事件队列中，然后等待 JavaScript 引擎执行。事件轮询机制的实现方式是通过一个事件循环来实现的。事件循环会不断地从事件队列中取出事件，然后执行相应的回调函数。
    > - JavaScript 引擎在执行 JavaScript 代码时，会将所有同步任务按照顺序放入执行栈中，然后依次执行。当遇到异步任务时，会将异步任务放入任务队列中，等待 JavaScript 引擎空闲时再去执行。当执行栈中的所有同步任务都执行完毕时，JavaScript 引擎会去查看任务队列中是否有任务需要执行。如果有，则将任务队列中的第一个任务取出来放入执行栈中执行。
-6. 在JavaScript中，Object类的方法作用有哪些？
+6. 谈谈什么是事件循环
+   > - 事件循环是JavaScript的一个基于并发模型的机制，负责执行代码、收集和处理事件以及执行队列中的子任务。主线程从“任务队列”中读取事件，这个过程是循环不断的，所以整个的这种运行机制又称为事件循环。事件循环执行消息队列中优先级最高的任务，如果没有任务，则执行微任务。
+7. 在JavaScript中，Object类的方法作用有哪些？
    > - Object.assign()：将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
    > - Object.create()：使用指定的原型对象和属性创建一个新对象。
    > - Object.defineProperty()：定义一个新属性或修改现有属性，并指定该属性的描述符。
@@ -50,26 +52,28 @@ categories:
    > - Object.getOwnPropertyDescriptor()：返回指定对象上一个自有属性对应的属性描述符。
    > - Object.getOwnPropertyDescriptors()：返回指定对象上所有自有属性（非继承属性）对应的属性描述符。
    > - Object.getOwnPropertyNames()：返回一个数组，它包含了指定对象所有自身属性（非继承属性）的名称（不包含 Symbol 类型的属性）。 4
-7. 谈谈你对跨域资源共享的机制的理解，以及跨域的几种解决方法
+8. 谈谈你对跨域资源共享的机制的理解，以及跨域的几种解决方法
    > 跨域资源共享（CORS）是一种机制，它允许 Web 应用程序从不同的域访问其资源。跨域的几种方法包括：
    > - JSONP：通过动态创建 script 标签，将数据作为回调函数的参数传递。
    > - CORS：通过在服务器端设置响应头，允许指定的域名访问资源。
    > - 代理：通过在同一域名下设置代理服务器，将请求转发到目标服务器。
-8. 谈谈你对js里面0.1+0.2!=0.3的理解
+9. 谈谈你对js里面0.1+0.2!=0.3的理解
    > - 这是因为在JavaScript中，浮点数运算的精度问题导致的。在计算机运行过程中，需要将数据转化成二进制，然后再进行计算。但是，由于二进制无法精确表示某些十进制小数，所以在进行浮点数运算时会出现精度问题。因此，0.1+0.2的结果并不是0.3，而是0.30000000000000004；
    > - 解决这个问题的方法有很多种，其中一种方法是使用toFixed()方法将结果转换为字符串，并指定小数位数。例如：(0.1+0.2).toFixed(1)的结果为"0.3"；
    > - 还可以使用BigInt解决这个问题。BigInt是JavaScript中的一个新的数字类型，可以用任意精度表示整数。使用BigInt，即使超出Number的安全整数范围限制，也可以安全地存储和操作大整数。
    > - 例如，可以使用BigInt来计算0.1+0.2的结果，如下所示：(0.1n+0.2n)===0.3n。这将返回true，因为BigInt可以精确表示这些数字。
-9. 谈谈你对js里面的this的理解
+10. 谈谈你对js里面的this的理解
    > - this是JavaScript中的一个关键字，它代表函数执行时所在的上下文对象。this的值取决于函数的调用方式，而不是函数的定义方式。this的值有以下几种情况：
    > - 作为对象的方法调用，this的值为调用该方法的对象；
    > - 作为普通函数调用，this的值为全局对象（浏览器中为window）；
    > - 作为构造函数调用，this的值为新创建的对象；
    > - 使用call、apply、bind调用，this的值为指定的对象。
-10. 双等号，三等号，object.is()的区别
+11. 双等号，三等号，object.is()的区别
    > - 在JavaScript中，双等号（==）和三等号（===）都是用于比较两个值是否相等。
    > - 但是，它们之间有一些区别。双等号运算符仅比较值，而三等号运算符不仅比较值，还比较类型。如果类型不同，则返回false。
    > - Object.is()方法与三等号运算符的行为相同，但它特别处理NaN、+0和-0，保证-0和+0不再相同，但Object.is(NaN, NaN)将返回true。
+12. Promise的三种状态
+   > - Promise 有三种状态：pending（等待态）、fulfilled（成功态）和 rejected（失败态）。当 Promise 被创建时，它处于 pending 状态。当 Promise 成功执行时，它会进入 fulfilled 状态；当 Promise 执行失败时，它会进入 rejected 状态。
 
 ### 原型链相关
 1. 谈谈你对原型链的理解
@@ -96,6 +100,12 @@ categories:
    > - ES6：copyWithin、fill、find、findIndex、includes
 3. 如何删除数组中的元素
    > splice、pop、shift；其中splice可以删除任意位置的元素，pop删除最后一个元素，shift删除第一个元素。他们的用法都是传入一个参数，表示要删除的元素的位置，splice还可以传入第二个参数，表示要删除的元素的个数。
+
+### 浏览器
+1. 谈谈浏览器缓存机制
+   > 浏览器缓存机制有四种：Memory Cache、Service Worker Cache、HTTP Cache、Push Cache。其中，HTTP 缓存是浏览器缓存机制中最常用的一种，它是根据 HTTP 头信息中的缓存标识来判断是否命中缓存的。HTTP 缓存又分为强缓存和协商缓存两种方式。强缓存是利用 Expires 和 Cache-Control 两个 HTTP 头信息来控制的，而协商缓存则是利用 Last-Modified 和 ETag 两个 HTTP 头信息来控制的。
+2. 为什么JSONP只支持get请求，不支持post请求
+   > JSONP只支持get请求，不支持post请求的原因是因为JSONP请求是通过动态创建script标签实现的，所以需要确保被请求的数据源返回的是JSONP格式的数据，而不是普通的JSON格式。因为script标签的src属性是没有跨域的限制的，所以可以通过script标签来实现跨域请求。而由于script标签只支持GET请求，所以JSONP只支持GET请求。
 
 ## React相关
 ### 基础
@@ -140,7 +150,11 @@ categories:
    > - Proxy 可以监听一些 Object.defineProperty 监听不到的操作，比如监听数组，监听对象属性的新增、删除等。
    > - Proxy 返回的是一个新对象，我们可以只操作新的对象达到目的，而 Object.defineProperty 只能遍历对象属性直接修改。
    > - Proxy 不兼容 IE，而 Object.defineProperty 不兼容 IE8 及以下版本。
-
+2. Vue的响应式原理是什么?
+   > Vue的响应式原理是通过Object.defineProperty()来实现的。Vue会将data中的数据进行递归地遍历，对每个属性都通过Object.defineProperty()来设置getter和setter，当数据发生变化时，会触发setter，从而通知依赖进行更新。
+3. 谈谈你对nextTick的理解
+   > - nextTick 是 Vue.js 中的一个 API，它的作用是在下次 DOM 更新循环结束之后执行延迟回调。nextTick 本质就是执行延迟回调的钩子，接受一个回调函数作为参数，在下次 DOM 更新循环结束之后执行延迟回调。nextTick 主要用于处理数据动态变化后，DOM还未及时更新的问题，用 nextTick 就可以获取数据更新后最新 DOM 的变化。
+   > - Vue.nextTick() 方法的实现原理是，把接收到的回调函数 flushSchedulerQueue() 保存在 callbacks 中，根据 pending 来判断当前是否要执行 timerFunc()，timerFunc() 是根据当前环境判断使用哪种异步方式，按照优先级依次使用 Promise (微)，MutationObserver 监视 dom 变动 (微)，setImmediate (宏)，setTimeout (宏)。
 ### Webpack相关
 1. 说一下你对webpack的理解
    > Webpack是一个模块打包工具，它可以将各种资源，如JS、CSS、图片等都作为模块来处理和使用。
